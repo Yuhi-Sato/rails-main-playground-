@@ -1,0 +1,18 @@
+<% content_for :title, "Projects — #{site.owner_name}" %>
+
+<section class="mx-auto max-w-5xl px-4 py-16">
+  <h1 class="text-4xl font-extrabold tracking-tight text-slate-900">Projects</h1>
+  <p class="mt-3 max-w-2xl text-slate-600">Selected things I've built, open-sourced, or shipped with teammates.</p>
+
+  <% if @projects.any? %>
+    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <% @projects.each do |project| %>
+        <%= render ProjectCardComponent.new(project: project) %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="mt-10 rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
+      Nothing published here yet.
+    </p>
+  <% end %>
+</section>

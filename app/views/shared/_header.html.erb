@@ -1,0 +1,15 @@
+<header class="border-b border-slate-200 bg-white/80 backdrop-blur">
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+    <%= link_to root_path, class: "flex items-center gap-2" do %>
+      <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">y</span>
+      <span class="font-semibold text-slate-900"><%= site.owner_name %></span>
+    <% end %>
+
+    <nav class="flex items-center gap-6 text-sm font-medium text-slate-600">
+      <%= link_to "About", about_path, class: "hover:text-slate-900" %>
+      <%= link_to "Projects", projects_path, class: "hover:text-slate-900" %>
+      <%= link_to "Blog", posts_path, class: "hover:text-slate-900" %>
+      <%= link_to "Contact", contact_new_path, class: "rounded-full bg-slate-900 px-4 py-1.5 text-white hover:bg-slate-700" %>
+    </nav>
+  </div>
+</header>

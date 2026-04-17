@@ -1,0 +1,73 @@
+<% content_for :title, "#{site.owner_name} — #{site.owner_role}" %>
+
+<section class="mx-auto max-w-5xl px-4 pt-16 pb-20">
+  <div class="grid grid-cols-1 gap-8 md:grid-cols-[auto,1fr] md:items-center">
+    <div class="inline-flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-sky-400 text-4xl font-extrabold text-white shadow-lg">
+      Y
+    </div>
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-widest text-indigo-600">@<%= site.owner_handle %></p>
+      <h1 class="mt-1 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+        Hi, I'm <%= site.owner_name %>.
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
+        <%= site.owner_role %> based in <%= site.owner_location %>.
+        I build Rails applications that are pleasant to maintain and pleasant to use.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <%= link_to "See my projects", projects_path, class: "rounded-full bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-500" %>
+        <%= link_to "Read the blog", posts_path, class: "rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 hover:bg-white" %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-5xl px-4 py-12">
+  <div class="mb-6 flex items-end justify-between">
+    <h2 class="text-2xl font-bold text-slate-900">Featured projects</h2>
+    <%= link_to "All projects →", projects_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-800" %>
+  </div>
+
+  <% if @featured_projects.any? %>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <% @featured_projects.each do |project| %>
+        <%= render ProjectCardComponent.new(project: project) %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
+      Projects coming soon.
+    </p>
+  <% end %>
+</section>
+
+<section class="mx-auto max-w-5xl px-4 py-12">
+  <div class="mb-6 flex items-end justify-between">
+    <h2 class="text-2xl font-bold text-slate-900">Latest writing</h2>
+    <%= link_to "All posts →", posts_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-800" %>
+  </div>
+
+  <% if @recent_posts.any? %>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <% @recent_posts.each do |post| %>
+        <%= render PostCardComponent.new(post: post) %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
+      No posts yet — check back soon.
+    </p>
+  <% end %>
+</section>
+
+<section class="mx-auto max-w-5xl px-4 py-12">
+  <h2 class="mb-6 text-2xl font-bold text-slate-900">Tooling I reach for</h2>
+
+  <% if @top_skills.any? %>
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <% @top_skills.each do |skill| %>
+        <%= render SkillBadgeComponent.new(skill: skill) %>
+      <% end %>
+    </div>
+  <% end %>
+</section>

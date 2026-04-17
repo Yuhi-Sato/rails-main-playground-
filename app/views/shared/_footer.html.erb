@@ -1,0 +1,12 @@
+<footer class="border-t border-slate-200 bg-white">
+  <div class="mx-auto flex max-w-5xl flex-col items-start justify-between gap-4 px-4 py-8 sm:flex-row sm:items-center">
+    <p class="text-sm text-slate-500">
+      © <%= Date.current.year %> <%= site.owner_name %>. Built with Rails <%= Rails.version %>.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-slate-500">
+      <% if site.github_url.present? %><%= link_to "GitHub", site.github_url, class: "hover:text-slate-900", target: "_blank", rel: "noopener" %><% end %>
+      <% if site.twitter_url.present? %><%= link_to "Twitter", site.twitter_url, class: "hover:text-slate-900", target: "_blank", rel: "noopener" %><% end %>
+      <% if site.linkedin_url.present? %><%= link_to "LinkedIn", site.linkedin_url, class: "hover:text-slate-900", target: "_blank", rel: "noopener" %><% end %>
+    </div>
+  </div>
+</footer>

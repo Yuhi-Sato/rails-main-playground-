@@ -1,0 +1,36 @@
+# See https://help.github.com/articles/ignoring-files for more about ignoring files.
+
+# Ignore bundler config
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# Ignore storage (uploaded files in development and any SQLite databases).
+/storage/*
+!/storage/.keep
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+/config/credentials/*.key
+
+# Ignore Brakeman/bundler-audit and other security scan output.
+/tmp/brakeman.html
+
+# Ignore assets.
+/public/assets
+
+# Ignore Kamal deploy outputs.
+/.kamal
+
+# Ignore node_modules.
+/node_modules/
+
+# Ignore IDE config.
+/.idea
+/.vscode

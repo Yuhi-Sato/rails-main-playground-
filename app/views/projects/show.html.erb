@@ -1,0 +1,21 @@
+<% content_for :title, "#{@project.title} — #{site.owner_name}" %>
+
+<section class="mx-auto max-w-3xl px-4 py-16">
+  <%= link_to "← All projects", projects_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-800" %>
+  <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900"><%= @project.title %></h1>
+
+  <% if @project.tech_list.any? %>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <% @project.tech_list.each do |tech| %>
+        <span class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs text-slate-700"><%= tech %></span>
+      <% end %>
+    </div>
+  <% end %>
+
+  <p class="mt-6 whitespace-pre-line leading-relaxed text-slate-700"><%= @project.description %></p>
+
+  <div class="mt-6 flex gap-4 text-sm">
+    <% if @project.url.present? %><%= link_to "Visit →", @project.url, class: "font-medium text-indigo-600 hover:text-indigo-800", target: "_blank", rel: "noopener" %><% end %>
+    <% if @project.github_url.present? %><%= link_to "GitHub", @project.github_url, class: "text-slate-500 hover:text-slate-700", target: "_blank", rel: "noopener" %><% end %>
+  </div>
+</section>

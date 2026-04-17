@@ -1,0 +1,22 @@
+default: &default
+  owner_name: "Yuhi Sato"
+  owner_handle: "yuhi"
+  owner_role: "Software Engineer"
+  owner_location: "Tokyo / Japan"
+  owner_email: "hello@yuhi.dev"
+  github_url: "https://github.com/yuhi-sato"
+  twitter_url: "https://twitter.com/yuhi"
+  linkedin_url: "https://www.linkedin.com/in/yuhi"
+  bio: |
+    Rails エンジニア。ドメイン駆動な設計、開発者体験の向上、
+    チームの生産性を高めるためのツール作りが好きです。
+    好きな Gem は view_component / action_policy / pagy。
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

@@ -1,0 +1,2 @@
+class ContactDelivery < ApplicationDelivery
+end

@@ -1,2 +1,2 @@
-class ApplicationComponent < ViewComponent::Base
+class ApplicationComponent < ViewComponentContrib::Base
 end

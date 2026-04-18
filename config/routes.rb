@@ -12,6 +12,16 @@ Rails.application.routes.draw do
   post "contact",        to: "contacts#create", as: :contact
   get  "contact/thanks", to: "contacts#thanks", as: :contact_thanks
 
-  # PgHero dashboard (mount behind auth in production)
-  mount PgHero::Engine, at: "pghero" if Rails.env.development?
+  namespace :api do
+    namespace :v1 do
+      resources :posts, only: %i[index show], param: :id
+    end
+  end
+
+  # Dev-only mounts
+  if Rails.env.development?
+    mount PgHero::Engine,        at: "pghero"
+    mount LetterOpenerWeb::Engine, at: "letters"
+    mount Lookbook::Engine,      at: "lookbook"
+  end
 end

@@ -99,6 +99,7 @@ posts.each do |attrs|
   post = Post.find_or_initialize_by(slug: attrs[:slug])
   post.assign_attributes(attrs)
   post.status = "published"
+  post.reading_time = (attrs[:body].to_s.split.size / 200.0).ceil
   post.save!
 end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_04_18_012003) do
+ActiveRecord::Schema[8.2].define(version: 2026_04_18_014125) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "pg_catalog.plpgsql"
@@ -20,14 +20,18 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_18_012003) do
     t.datetime "created_at", null: false
     t.datetime "discarded_at"
     t.jsonb "log_data"
+    t.jsonb "metadata", default: {}, null: false
     t.datetime "published_at"
+    t.tsvector "search_vector"
     t.string "slug", null: false
     t.string "status", default: "draft", null: false
     t.string "tags", default: [], array: true
     t.string "title", null: false
     t.datetime "updated_at", null: false
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
+    t.index ["metadata"], name: "index_posts_on_metadata", using: :gin
     t.index ["published_at"], name: "index_posts_on_published_at"
+    t.index ["search_vector"], name: "index_posts_on_search_vector", using: :gin
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["status"], name: "index_posts_on_status"
     t.index ["tags"], name: "index_posts_on_tags", using: :gin

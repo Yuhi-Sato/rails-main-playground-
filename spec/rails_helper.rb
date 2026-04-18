@@ -13,6 +13,11 @@ require 'view_component/system_test_helpers'
 require 'capybara/rspec'
 require 'action_policy/rspec'
 require 'n_plus_one_control/rspec'
+require 'webmock/rspec'
+require 'zonebie/rspec'
+require 'test_prof/recipes/rspec/let_it_be'
+
+WebMock.disable_net_connect!(allow_localhost: true)
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -75,6 +80,12 @@ RSpec.configure do |config|
   config.include ViewComponent::TestHelpers, type: :component
   config.include Capybara::RSpecMatchers, type: :component
   config.infer_spec_type_from_file_location!
+
+  # Keep Stoplight lights from leaking state between specs.
+  config.before(:each) do
+    light = Stoplight("contact-delivery")
+    light.state_store.clear if light.state_store.respond_to?(:clear)
+  end
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!

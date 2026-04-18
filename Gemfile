@@ -45,33 +45,51 @@ gem "action_policy"
 
 # --- UI / Views ------------------------------------------------------------
 gem "view_component"
+gem "view_component-contrib"
 gem "pagy", "~> 9.3"
 
 # --- Background jobs -------------------------------------------------------
 gem "sidekiq"
+gem "schked"
 
 # --- Performance / JSON ----------------------------------------------------
 gem "oj"
 gem "oj_mimic_json", require: false
+gem "alba"
 
-# --- Active Record helpers ------------------------------------------------
+# --- Active Record helpers -------------------------------------------------
 gem "discard", "~> 1.3"
 gem "groupdate"
 gem "ar_lazy_preload"
 gem "logidze"
 gem "fx"
+gem "pg_search"
+gem "store_attribute"
+gem "store_model"
 gem "state_machines-activerecord"
 gem "after_commit_everywhere"
+gem "active_record-associated_object"
+gem "active_job-performs"
 
 # --- Mail / Notifications --------------------------------------------------
 gem "active_delivery"
 gem "abstract_notifier"
+gem "premailer-rails"
+
+# --- Images / Assets -------------------------------------------------------
+gem "imgproxy"
 
 # --- Ruby toolkit ----------------------------------------------------------
 gem "dry-initializer"
 gem "dry-monads"
+gem "dry-effects"
 gem "retriable"
 gem "nanoid"
+gem "stoplight"
+gem "feature_toggles"
+
+# --- Logging noise reduction ----------------------------------------------
+gem "silencer", require: ["silencer/rails/logger"]
 
 # --- Realtime / AnyCable ---------------------------------------------------
 gem "anycable-rails"
@@ -110,18 +128,33 @@ group :development, :test do
   gem "rubocop-performance", require: false
   gem "rubocop-factory_bot", require: false
 
-  # Detects non-atomic database transactions / side-effects
   gem "isolator"
   gem "n_plus_one_control"
+  gem "prosopite"
+  gem "database_consistency", require: false
 end
 
 group :development do
   gem "web-console"
   gem "lefthook", require: false
   gem "evil-seed", require: false
+
+  gem "freezolite", require: false
+  gem "strong_migrations"
+  gem "letter_opener"
+  gem "letter_opener_web"
+  gem "rack-mini-profiler"
+  gem "lookbook"
 end
 
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+
+  gem "with_model"
+  gem "webmock"
+  gem "zonebie"
+  gem "fuubar", require: false
+  gem "rspec-instafail", require: false
+  gem "test-prof"
 end

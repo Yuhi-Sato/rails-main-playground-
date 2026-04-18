@@ -1,7 +1,13 @@
 class Post < ApplicationRecord
   include Discard::Model
+  include PgSearch::Model
 
   has_logidze
+  has_object :publisher
+
+  store_attribute :metadata, :reading_time, :integer, default: 5
+  store_attribute :metadata, :canonical_url, :string
+  store_attribute :metadata, :cover_alt, :string
 
   STATES = %w[draft published archived].freeze
 
@@ -23,13 +29,20 @@ class Post < ApplicationRecord
     end
   end
 
+  performs :publish
+
   validates :title, :slug, presence: true
   validates :slug, uniqueness: true
+  validates :reading_time, numericality: { greater_than: 0, only_integer: true }
 
   before_validation :ensure_slug
 
   scope :published, -> { kept.where(status: :published).where(published_at: ..Time.current) }
   scope :recent, -> { order(published_at: :desc, created_at: :desc) }
+
+  pg_search_scope :search_text,
+    against: { title: "A", body: "B" },
+    using:  { tsearch: { prefix: true, dictionary: "english" } }
 
   def to_param = slug
 

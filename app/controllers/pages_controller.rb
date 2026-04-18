@@ -8,4 +8,10 @@ class PagesController < ApplicationController
   def about
     @skills_by_category = Skill.ordered.group_by(&:category)
   end
+
+  def stats
+    @posts_by_month = Post.published.group_by_month(:published_at, last: 12).count
+    @skills_by_cat  = Skill.group(:category).count
+    @published_count_via_fx = Post.published_count_via_fx
+  end
 end

@@ -6,10 +6,10 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
 
-    if @contact.valid?
-      ContactMailer.notify(@contact.to_h).deliver_later
+    case ContactSubmission.call(@contact)
+    in Dry::Monads::Success
       redirect_to contact_thanks_path
-    else
+    in Dry::Monads::Failure
       render :new, status: :unprocessable_content
     end
   end

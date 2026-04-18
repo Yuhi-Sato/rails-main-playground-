@@ -1,0 +1,29 @@
+<% content_for :title, "Stats — #{site.owner_name}" %>
+
+<section class="mx-auto max-w-3xl px-4 py-16">
+  <h1 class="text-4xl font-extrabold tracking-tight text-slate-900">Site stats</h1>
+  <p class="mt-3 text-slate-600">
+    Published posts (via <code class="rounded bg-slate-100 px-1">fx</code> SQL function):
+    <span class="font-semibold text-slate-900"><%= @published_count_via_fx %></span>
+  </p>
+
+  <h2 class="mt-10 text-2xl font-bold text-slate-900">Posts per month</h2>
+  <ul class="mt-4 divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
+    <% @posts_by_month.each do |month, count| %>
+      <li class="flex items-center justify-between px-4 py-2 text-sm">
+        <span class="text-slate-600"><%= month.strftime("%Y-%m") %></span>
+        <span class="font-semibold text-slate-900"><%= count %></span>
+      </li>
+    <% end %>
+  </ul>
+
+  <h2 class="mt-10 text-2xl font-bold text-slate-900">Skills by category</h2>
+  <ul class="mt-4 divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white">
+    <% @skills_by_cat.each do |category, count| %>
+      <li class="flex items-center justify-between px-4 py-2 text-sm">
+        <span class="text-slate-600"><%= category.capitalize %></span>
+        <span class="font-semibold text-slate-900"><%= count %></span>
+      </li>
+    <% end %>
+  </ul>
+</section>

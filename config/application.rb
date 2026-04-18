@@ -17,6 +17,9 @@ module YuhiSite
     config.i18n.available_locales = %i[en ja]
     config.i18n.fallbacks = [:en]
 
+    # Sidekiq backs ActiveJob in production; inline in dev/test keeps specs sync.
+    config.active_job.queue_adapter = Rails.env.production? ? :sidekiq : :inline
+
     # Generate short, URL-safe IDs by default
     config.generators do |g|
       g.test_framework :rspec,

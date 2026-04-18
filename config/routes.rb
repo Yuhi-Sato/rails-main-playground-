@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root "pages#home"
   get  "about",    to: "pages#about",       as: :about
+  get  "stats",    to: "pages#stats",       as: :stats
 
   resources :projects, only: %i[index show]
   resources :posts,    only: %i[index show]

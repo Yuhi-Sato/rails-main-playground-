@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :skill do
-    name { "MyString" }
-    category { "MyString" }
-    level { 1 }
-    position { 1 }
+    sequence(:name) { |n| "Skill #{n}" }
+    category { Skill::CATEGORIES.sample }
+    level    { 3 }
+    sequence(:position) { |n| n }
   end
 end

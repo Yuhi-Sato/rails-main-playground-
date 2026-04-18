@@ -1,8 +1,8 @@
 class ContactMailer < ApplicationMailer
-  def notify(payload)
-    @name    = payload[:name]
-    @email   = payload[:email]
-    @message = payload[:message]
+  def notify(name:, email:, message:)
+    @name    = name
+    @email   = email
+    @message = message
 
     mail(
       to:       SiteConfig.new.owner_email,

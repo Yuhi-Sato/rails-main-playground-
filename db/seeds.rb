@@ -95,6 +95,11 @@ posts = [
     MD
   }
 ]
-posts.each { |attrs| Post.find_or_create_by!(slug: attrs[:slug]) { |p| p.assign_attributes(attrs) } }
+posts.each do |attrs|
+  post = Post.find_or_initialize_by(slug: attrs[:slug])
+  post.assign_attributes(attrs)
+  post.status = "published"
+  post.save!
+end
 
 puts "Done."

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_04_17_152152) do
+ActiveRecord::Schema[8.2].define(version: 2026_04_18_012003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "pg_catalog.plpgsql"
@@ -22,12 +22,14 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_17_152152) do
     t.jsonb "log_data"
     t.datetime "published_at"
     t.string "slug", null: false
+    t.string "status", default: "draft", null: false
     t.string "tags", default: [], array: true
     t.string "title", null: false
     t.datetime "updated_at", null: false
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
     t.index ["published_at"], name: "index_posts_on_published_at"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
+    t.index ["status"], name: "index_posts_on_status"
     t.index ["tags"], name: "index_posts_on_tags", using: :gin
   end
 
@@ -788,6 +790,19 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_17_152152) do
           END IF;
           RETURN buf;
         END;
+      $function$
+  SQL
+
+  create_function :posts_published_count, sql_definition: <<-'SQL'
+      CREATE OR REPLACE FUNCTION public.posts_published_count()
+       RETURNS integer
+       LANGUAGE sql
+       STABLE
+      AS $function$
+        SELECT COUNT(*)::int
+        FROM posts
+        WHERE status = 'published'
+          AND discarded_at IS NULL;
       $function$
   SQL
 
